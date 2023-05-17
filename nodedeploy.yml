@@ -1,21 +1,24 @@
-
-kind: Deployment 
 apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: nodedep
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx
 spec:
   replicas: 1
   selector:
-    matchExpressions:
-      - {key: env, operator: In, values: [test]}
+    matchLabels:
+      app: nginx
+  strategy: {}
   template:
     metadata:
-      name: nodepod
+      creationTimestamp: null
       labels:
-        env: test
+        app: nginx
     spec:
       containers:
-        - name: nodecont
-          image: nginx
-          ports:
-            - containerPort: 80
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}
