@@ -1,24 +1,22 @@
+kind: Deployment 
 apiVersion: apps/v1
-kind: Deployment
 metadata:
-  creationTimestamp: null
-  labels:
-    app: nginx
-  name: nginx
+  name: ngdeploy
 spec:
-  replicas: 1
+  replicas: 3
   selector:
-    matchLabels:
-      app: nginx
-  strategy: {}
+    matchExpressions:
+      - {key: env, operator: In, values: [test]}
   template:
     metadata:
-      creationTimestamp: null
+      name: myngx
       labels:
-        app: nginx
+        env: test
     spec:
       containers:
-      - image: nginx
-        name: nginx
-        resources: {}
-status: {}
+        - name: c01
+          image: nginx
+          ports:
+            - containerPort: 80
+    
+    
